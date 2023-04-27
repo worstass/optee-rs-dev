@@ -11,6 +11,7 @@ RUN apt-get update && \
       libssl-dev \
       libtool \
       make \
+      device-tree-compiler \
       ninja-build \
       python3-crypto \
       python3-cryptography \
