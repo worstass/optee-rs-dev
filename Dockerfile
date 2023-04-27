@@ -1,4 +1,4 @@
-FROM ubuntu:jammy
+FROM ubuntu:focal
 ENV DEBIAN_FRONTEND noninteractive
 ENV OPTEE_VERSION 3.20.0
 RUN apt-get update && \
@@ -13,12 +13,13 @@ RUN apt-get update && \
       make \
       device-tree-compiler \
       ninja-build \
+      python3-crypto \
       python3-cryptography \
       python3-pip \
       python3-pyelftools \
       python3-serial \
       uuid-dev \
-      cmake gcc-aarch64-linux-gnu gcc-arm-linux-gnueabihf && \
+      cmake gcc-aarch64-linux-gnu gcc-arm-linux-gnueabihf pkg-config-aarch64-linux-gnu pkg-config-arm-linux-gnueabihf && \
     apt-get clean && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 WORKDIR /build
 RUN git clone --depth 1 -b ${OPTEE_VERSION} https://github.com/OP-TEE/optee_os.git && \
@@ -41,7 +42,4 @@ RUN git clone --depth 1 -b ${OPTEE_VERSION} https://github.com/OP-TEE/optee_os.g
     
 RUN git clone --depth 1 -b ${OPTEE_VERSION} https://github.com/OP-TEE/optee_client.git && \
     cd optee_client && \
-    mkdir build && \
-    cd build && \
-    cmake -DCMAKE_C_COMPILER=aarch64-linux-gnu-gcc -DCMAKE_INSTALL_PREFIX=/optee/optee_client .. && \
-    make
+    make CROSS_COMPILE=aarch64-linux-gnu- DESTDIR=/optee/optee_client
