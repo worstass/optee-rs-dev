@@ -13,7 +13,6 @@ RUN apt-get update && \
       make \
       device-tree-compiler \
       ninja-build \
-      python3-crypto \
       python3-cryptography \
       python3-pip \
       python3-pyelftools \
