@@ -38,8 +38,7 @@ RUN apt-get update && \
       # extra for Docker only \
       git \
       nano \
-      cmake gcc-aarch64-linux-gnu gcc-aarch64-linux-gnu gcc-arm-linux-gnueabihf
-     
+      cmake gcc-aarch64-linux-gnu gcc-aarch64-linux-gnu gcc-arm-linux-gnueabihf && \
     apt-get clean && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
 RUN curl https://storage.googleapis.com/git-repo-downloads/repo > /bin/repo
