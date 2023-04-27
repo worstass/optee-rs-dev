@@ -1,4 +1,5 @@
 FROM ubuntu:focal
+ENV DEBIAN_FRONTEND noninteractive
 ENV OPTEE_VERSION 3.20.0
 RUN apt-get update && \
     apt-get install -y --no-install-recommends \
@@ -10,8 +11,7 @@ RUN apt-get update && \
       libtool \
       make \
       ninja-build \
-      xz-utils \
-      cmake gcc-aarch64-linux-gnu gcc-aarch64-linux-gnu gcc-arm-linux-gnueabihf && \
+      cmake gcc-aarch64-linux-gnu gcc-arm-linux-gnueabihf && \
     apt-get clean && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 RUN git clone --depth 1 -b ${OPTEE_VERSION} https://github.com/OP-TEE/optee_os && \
     cd optee_os && \
