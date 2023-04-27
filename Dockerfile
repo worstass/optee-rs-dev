@@ -10,6 +10,7 @@ RUN apt-get update && \
       build-essential \
       libssl-dev \
       libtool \
+      libc6-dev-i386 \
       make \
       device-tree-compiler \
       ninja-build \
