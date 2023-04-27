@@ -13,7 +13,7 @@ RUN apt-get update && \
       ninja-build \
       cmake gcc-aarch64-linux-gnu gcc-arm-linux-gnueabihf && \
     apt-get clean && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
-RUN git clone --depth 1 -b ${OPTEE_VERSION} https://github.com/OP-TEE/optee_os && \
+RUN git clone --depth 1 -b ${OPTEE_VERSION} https://github.com/OP-TEE/optee_os.git && \
     cd optee_os && \
     make \
       CFG_ARM64_core=y \
@@ -26,7 +26,7 @@ RUN git clone --depth 1 -b ${OPTEE_VERSION} https://github.com/OP-TEE/optee_os &
       DEBUG=1 \
       O=out/arm \
       PLATFORM=vexpress-qemu_armv8a
-RUN git clone https://github.com/OP-TEE/optee_client && \
+RUN git clone --depth 1 -b ${OPTEE_VERSION} https://github.com/OP-TEE/optee_client.git && \
     cd optee_client && \
     mkdir build && \
     cd build && \
