@@ -12,6 +12,11 @@ RUN apt-get update && \
       libtool \
       make \
       ninja-build \
+      python3-crypto \
+      python3-cryptography \
+      python3-pip \
+      python3-pyelftools \
+      python3-serial \
       cmake gcc-aarch64-linux-gnu gcc-arm-linux-gnueabihf && \
     apt-get clean && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 RUN git clone --depth 1 -b ${OPTEE_VERSION} https://github.com/OP-TEE/optee_os.git && \
