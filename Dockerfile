@@ -1,8 +1,7 @@
 FROM ubuntu:focal
-ENV DEBIAN_FRONTEND noninteractive
 ENV OPTEE_VERSION 3.20.0
 RUN apt-get update && \
-    apt-get -y install \
+    apt-get install -y --no-install-recommends \
       autoconf \
       automake \
       bc \
