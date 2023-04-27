@@ -1,4 +1,4 @@
-FROM ubuntu:focal
+FROM ubuntu:jammy
 ENV DEBIAN_FRONTEND noninteractive
 ENV OPTEE_VERSION 3.20.0
 RUN apt-get update && \
@@ -18,8 +18,10 @@ RUN apt-get update && \
       python3-pip \
       python3-pyelftools \
       python3-serial \
+      uuid-dev \
       cmake gcc-aarch64-linux-gnu gcc-arm-linux-gnueabihf && \
     apt-get clean && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
+WORKDIR /build
 RUN git clone --depth 1 -b ${OPTEE_VERSION} https://github.com/OP-TEE/optee_os.git && \
     cd optee_os && \
     make \
@@ -32,7 +34,12 @@ RUN git clone --depth 1 -b ${OPTEE_VERSION} https://github.com/OP-TEE/optee_os.g
       CROSS_COMPILE_ta_arm64=aarch64-linux-gnu- \
       DEBUG=1 \
       O=out/arm \
-      PLATFORM=vexpress-qemu_armv8a
+      PLATFORM=vexpress-qemu_armv8a && \
+    mkdir -p /optee/optee_os/arm && \
+    cp -r out/arm/export-ta_arm32 /optee/optee_os/arm && \
+    cp -r out/arm/export-ta_arm64 /optee/optee_os/arm && \
+    cd /build && rm -rf optee_os/
+    
 RUN git clone --depth 1 -b ${OPTEE_VERSION} https://github.com/OP-TEE/optee_client.git && \
     cd optee_client && \
     mkdir build && \
