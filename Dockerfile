@@ -21,7 +21,9 @@ RUN apt-get update && \
       python3-serial \
       uuid-dev \
       dpkg-dev \
-      cmake gcc-aarch64-linux-gnu gcc-arm-linux-gnueabihf pkg-config-aarch64-linux-gnu pkg-config-arm-linux-gnueabihf && \
+      cmake gcc-aarch64-linux-gnu gcc-arm-linux-gnueabihf binutils-aarch64-linux-gnu \
+      binutils-aarch64-linux-gnu binutils-arm-linux-gnueabihf \
+      pkg-config-aarch64-linux-gnu pkg-config-arm-linux-gnueabihf && \
     apt-get clean && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 WORKDIR /build
 RUN git clone --depth 1 -b ${OPTEE_VERSION} https://github.com/OP-TEE/optee_os.git && \
@@ -46,6 +48,7 @@ RUN git clone --depth 1 -b ${OPTEE_VERSION} https://github.com/OP-TEE/optee_clie
     cd optee_client && mkdir build && cd build && \
     cmake -DCMAKE_C_COMPILER=aarch64-linux-gnu-gcc -DCMAKE_INSTALL_PREFIX=/optee/optee_client .. && \
     make install && \
+    mkdir -p /optee/optee_client/libteec && cd /optee/optee_client/libteec && ln -s ../lib/libteec.a libteec.a && \
     cd /build && rm -rf optee_client/
 
 ENV OPTEE_DIR /optee
