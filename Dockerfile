@@ -42,5 +42,7 @@ RUN git clone --depth 1 -b ${OPTEE_VERSION} https://github.com/OP-TEE/optee_os.g
     cd /build && rm -rf optee_os/
     
 RUN git clone --depth 1 -b ${OPTEE_VERSION} https://github.com/OP-TEE/optee_client.git && \
-    cd optee_client && \
-    make CROSS_COMPILE=aarch64-linux-gnu- DESTDIR=/optee/optee_client
+    cd optee_client && mkdir build && cd build && \
+    cmake -DCMAKE_C_COMPILER=aarch64-linux-gnu-gcc .. && \
+    make 
+#make CROSS_COMPILE=aarch64-linux-gnu- DESTDIR=/optee/optee_client
