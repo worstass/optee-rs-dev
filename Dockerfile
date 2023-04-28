@@ -39,9 +39,9 @@ RUN git clone --depth 1 -b ${OPTEE_VERSION} https://github.com/OP-TEE/optee_os.g
       DEBUG=1 \
       O=out/arm \
       PLATFORM=vexpress-qemu_armv8a && \
-    mkdir -p /optee/optee_os/arm && \
-    cp -r out/arm/export-ta_arm32 /optee/optee_os/arm && \
-    cp -r out/arm/export-ta_arm64 /optee/optee_os/arm && \
+    mkdir -p /optee/optee_os/out/arm && \
+    cp -r out/arm/export-ta_arm32 /optee/optee_os/out/arm && \
+    cp -r out/arm/export-ta_arm64 /optee/optee_os/out/arm && \
     cd /build && rm -rf optee_os/
     
 RUN git clone --depth 1 -b ${OPTEE_VERSION} https://github.com/OP-TEE/optee_client.git && \
