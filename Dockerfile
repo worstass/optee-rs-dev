@@ -44,4 +44,12 @@ RUN git clone --depth 1 -b ${OPTEE_VERSION} https://github.com/OP-TEE/optee_os.g
 RUN git clone --depth 1 -b ${OPTEE_VERSION} https://github.com/OP-TEE/optee_client.git && \
     cd optee_client && mkdir build && cd build && \
     cmake -DCMAKE_C_COMPILER=aarch64-linux-gnu-gcc -DCMAKE_INSTALL_PREFIX=/optee/optee_client .. && \
-    make install 
+    make install
+
+ENV OPTEE_DIR /optee
+WORKDIR /optee
+RUN git clone https://github.com/apache/incubator-teaclave-trustzone-sdk.git optee_rust && \
+    cd optee_rust && \
+    git checkout ae006b2 && \
+    sed -i 's/1.56.0/1.57.0/g' setup.sh && \
+    ./setup.sh
