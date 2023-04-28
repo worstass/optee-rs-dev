@@ -2,7 +2,7 @@ FROM ubuntu:focal
 ENV DEBIAN_FRONTEND noninteractive
 ENV OPTEE_VERSION 3.20.0
 RUN apt-get update && \
-    apt-get install -y --no-install-recommends \
+    apt-get install -y \
       ca-certificates \
       git \
       autoconf \
@@ -10,8 +10,6 @@ RUN apt-get update && \
       build-essential \
       libssl-dev \
       libtool \
-      libc6-dev  libc6-dev-arm64-cross libc6-dev-armhf-cross \
-      linux-libc-dev linux-libc-dev-arm64-cross linux-libc-dev-armhf-cross \
       make \
       device-tree-compiler \
       ninja-build \
@@ -21,6 +19,7 @@ RUN apt-get update && \
       python3-pyelftools \
       python3-serial \
       uuid-dev \
+      dpkg-dev \
       cmake gcc-aarch64-linux-gnu gcc-arm-linux-gnueabihf pkg-config-aarch64-linux-gnu pkg-config-arm-linux-gnueabihf && \
     apt-get clean && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 WORKDIR /build
