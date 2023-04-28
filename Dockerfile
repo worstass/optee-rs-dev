@@ -53,4 +53,5 @@ RUN git clone https://github.com/apache/incubator-teaclave-trustzone-sdk.git opt
     cd optee_rust && \
     git checkout ae006b2 && \
     sed -i 's/1.56.0/1.57.0/g' setup.sh && \
+    mkdir -p $HOME/.cargo && touch $HOME/.cargo/env && \
     ./setup.sh
