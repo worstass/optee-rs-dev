@@ -15,7 +15,7 @@ jobs:
     - name: Build the Docker image
       run: |
        docker build -t ${IMAGE_TAG} -f Dockerfile .
-#       docker push ${IMAGE_TAG}
+       docker push ${IMAGE_TAG}
       env:
         OPTEE_VERSION: 3.20.0
         IMAGE_TAG: worstass/optee-rs-dev:3.20.0
