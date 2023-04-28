@@ -3,6 +3,7 @@ ENV DEBIAN_FRONTEND noninteractive
 ENV OPTEE_VERSION 3.20.0
 RUN apt-get update && \
     apt-get install -y \
+      curl \
       ca-certificates \
       git \
       autoconf \
